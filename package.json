@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon -i node_modules -x npm -- test",
     "test": "mocha --compilers js:babel-register -r babel-polyfill -R nyan ./**/*.spec.js",
-    "build": "babel src -d . -s"
+    "build": "babel src -d . -s",
+    "boom": "npm version patch && git push --follow-tags && npm publish"
   },
   "author": "renegare",
   "license": "MIT",
