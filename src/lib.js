@@ -11,7 +11,7 @@ export default (express, supertest) => {
       app.use(middleware)
     })
 
-    app[method](path, handler)
+    app.use(handler)
 
     const wrapper = supertest(app)[method](path)
     wrapper.expectError = handler => {
@@ -26,10 +26,10 @@ export default (express, supertest) => {
 
   return {
     request,
-    get: (...args) => assert.apply(null, ['get'].concat(args)),
-    post: (...args) => assert.apply(null, ['post'].concat(args)),
-    put: (...args) => assert.apply(null, ['put'].concat(args)),
-    del: (...args) => assert.apply(null, ['del'].concat(args)),
-    head: (...args) => assert.apply(null, ['head'].concat(args))
+    get: (...args) => request.apply(null, ['get'].concat(args)),
+    post: (...args) => request.apply(null, ['post'].concat(args)),
+    put: (...args) => request.apply(null, ['put'].concat(args)),
+    del: (...args) => request.apply(null, ['del'].concat(args)),
+    head: (...args) => request.apply(null, ['head'].concat(args))
   }
 }
