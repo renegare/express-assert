@@ -1,6 +1,6 @@
 {
   "name": "express-assert",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "test wrapper for express routes using supertest and express (batteries not included)",
   "main": "lib.js",
   "scripts": {
