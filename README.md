@@ -63,10 +63,10 @@ Ideally this should be in some git hook; but the minimal dev flow:
 
 ```
 $ npm run dev
-$ npm run build
 $ git commit ...
 $ npm version patch
 $ git push --follow-tags
+$ npm run build
 ```
 
 Do the above in the development branch. When ready merge to the master branch and the ci should handle publishing to npm 🍾
