@@ -59,11 +59,11 @@ describe('express assert', () => {
 
 ## Development
 
-Ideally this should be in some git hook; but is minimal dev flow:
+Ideally this should be in some git hook; but the minimal dev flow:
 
 ```
 $ npm run dev
-$ npm rub build
+$ npm run build
 $ git commit ...
 $ npm version patch
 $ git push --follow-tags
