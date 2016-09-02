@@ -7,6 +7,7 @@ export default (express, supertest) => {
     }
     const handler = handlers.pop()
     const app = express()
+    app.set('env', 'test')
     handlers.forEach(middleware => {
       app.use(middleware)
     })
