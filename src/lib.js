@@ -12,12 +12,18 @@ export default (express, supertest) => {
     })
 
     app.use(handler)
+    let appError
+    app.use((err, req, res, next) => {
+      appError = {err, req, res}
+      next(err)
+    })
 
     const wrapper = supertest(app)[method](path)
-    wrapper.expectError = handler => {
-      app.use((err, req, res, next) => {
-        handler(err, req, res)
-        next(err)
+    wrapper.expectNextError = handler => {
+      wrapper.expect(() => {
+        if (appError) {
+          handler(appError.err, appError.req, appError.res)
+        }
       })
       return wrapper
     }

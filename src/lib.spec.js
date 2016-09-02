@@ -32,10 +32,27 @@ describe('express assert', () => {
     }
 
     get(cut)
-      .expectError(error => {
+      .expectNextError(error => {
         expect(error).to.equal(err)
       })
       .end(done)
+  })
+
+  it('should catch errors in errors @wip', done => {
+    const error = new Error('Yup!')
+    const cut = (req, res, next) => {
+      expect(req.method).to.eql('GET')
+      next(error)
+    }
+
+    get(cut)
+      .expectNextError(err => {
+        throw err
+      })
+      .end(err => {
+        expect(err).to.equal(error)
+        done()
+      })
   })
 
   it('should request path', done => {
