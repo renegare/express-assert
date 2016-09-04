@@ -7,7 +7,8 @@ const assert = Assert(express, supertest)
 const {
   request,
   get,
-  post
+  post,
+  del
 } = assert
 
 describe('express assert', () => {
@@ -41,11 +42,11 @@ describe('express assert', () => {
   it('should catch errors in errors @wip', done => {
     const error = new Error('Yup!')
     const cut = (req, res, next) => {
-      expect(req.method).to.eql('GET')
+      expect(req.method).to.eql('POST')
       next(error)
     }
 
-    get(cut)
+    post(cut)
       .expectNextError(err => {
         throw err
       })
@@ -57,12 +58,12 @@ describe('express assert', () => {
 
   it('should request path', done => {
     const route = express.Router()
-    route.post('/assumption', (req, res, next) => {
-      expect(req.method).to.eql('POST')
+    route.delete('/assumption', (req, res, next) => {
+      expect(req.method).to.eql('DELETE')
       res.json(true)
     })
 
-    post('/assumption', route)
+    del('/assumption', route)
       .expect(res => {
         expect(res.body).to.be.true
       })

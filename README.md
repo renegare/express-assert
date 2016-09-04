@@ -35,20 +35,37 @@ describe('express assert', () => {
     }
 
     get(cut)
-      .expectError(error => {
+      .expectNextError(error => {
         expect(error).to.equal(err)
       })
       .end(done)
   })
 
+  it('should catch errors in errors @wip', done => {
+    const error = new Error('Yup!')
+    const cut = (req, res, next) => {
+      expect(req.method).to.eql('POST')
+      next(error)
+    }
+
+    post(cut)
+      .expectNextError(err => {
+        throw err
+      })
+      .end(err => {
+        expect(err).to.equal(error)
+        done()
+      })
+  })
+
   it('should request path', done => {
     const route = express.Router()
-    route.post('/assumption', (req, res, next) => {
-      expect(req.method).to.eql('POST')
+    route.delete('/assumption', (req, res, next) => {
+      expect(req.method).to.eql('DELETE')
       res.json(true)
     })
 
-    post('/assumption', route)
+    del('/assumption', route)
       .expect(res => {
         expect(res.body).to.be.true
       })
