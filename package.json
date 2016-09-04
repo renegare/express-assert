@@ -3,6 +3,10 @@
   "version": "1.0.8",
   "description": "test wrapper for express routes using supertest and express (batteries not included)",
   "main": "lib.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/renegare/express-assert.git"
+  },
   "scripts": {
     "dev": "nodemon -i node_modules -x npm -- test",
     "test": "mocha --compilers js:babel-register -r babel-polyfill -R nyan ./**/*.spec.js",
